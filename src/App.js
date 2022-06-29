@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import {Table, TableBody, TableHead, TableRow, TableCell} from '@mui/material'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Country</TableCell>
+            <TableCell>Capital</TableCell>
+            <TableCell>Phone Code</TableCell>
+            <TableCell>Currency Code</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>United States</TableCell>
+            <TableCell>Washington D.C.</TableCell>
+            <TableCell>+1</TableCell>
+            <TableCell>USD</TableCell>
+          </TableRow>
+          
+      </TableBody>
+      </Table>
+
     </div>
   );
 }

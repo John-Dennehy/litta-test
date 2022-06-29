@@ -1,7 +1,19 @@
-import './App.css';
-import {Table, TableBody, TableHead, TableRow, TableCell} from '@mui/material'
+import "./App.css";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableCell,
+  CircularProgress,
+} from "@mui/material";
+import { useData } from "././api/useData";
 
 function App() {
+  const countries = useData();
+
+  console.log(countries);
+
   return (
     <div className="App">
       <Table>
@@ -14,16 +26,34 @@ function App() {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            <TableCell>United States</TableCell>
-            <TableCell>Washington D.C.</TableCell>
-            <TableCell>+1</TableCell>
-            <TableCell>USD</TableCell>
-          </TableRow>
-          
-      </TableBody>
-      </Table>
+          {countries.isSuccess &&
+            countries.data.map((country) => (
+              <TableRow key={country.id}>
+                <TableCell>{country.name}</TableCell>
+                <TableCell>{country.capital}</TableCell>
+                <TableCell>{country.phone}</TableCell>
+                <TableCell>{country.currency}</TableCell>
+              </TableRow>
+            ))}
 
+          {countries.isLoading && (
+            <TableRow>
+              <TableCell colSpan={4}>
+                <CircularProgress />
+              </TableCell>
+            </TableRow>
+          )}
+
+          {countries.isError && (
+            <TableRow>
+              <TableCell colSpan={4}>
+                <p>Error:</p>
+                {countries.error.message}
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 }
